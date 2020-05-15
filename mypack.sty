@@ -1,0 +1,142 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mypack}[2009/02/02]
+
+%---- Options  ----
+\newif\if@titles     \@titlesfalse
+\DeclareOption{titles}{\@titlestrue}
+\DeclareOption*{\PassOptionsToPackage{\CurrentOption}{babel}}
+\ProcessOptions
+%---------------------
+
+%---- Packages ---
+\RequirePackage{url}
+\RequirePackage[latin1]{inputenc} 
+\RequirePackage[french]{babel}
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+\RequirePackage{graphicx}
+\RequirePackage{cite}
+\RequirePackage{xspace}
+\RequirePackage{parsetree}
+\RequirePackage{lscape}
+\RequirePackage{makeidx}
+\RequirePackage{moreverb}
+\RequirePackage{examplep}
+%---------------------
+
+%--- Normalisation des espaces verticaux
+\newcommand{\smalljump}{\vskip 0.1cm}
+\newcommand{\jump}{\vskip 0.2cm}
+\newcommand{\largejump}{\vskip 0.3cm}
+\newcommand{\bigjump}{\vskip 1cm}
+\newcommand{\hugejump}{\vskip 2cm}
+\newcommand{\HUGEjump}{\vskip 4cm}
+
+%--- Ajout d'une marge au verbatim dans une box : \begin{code} Blabla \end{code}
+\newenvironment{code}
+{ \center \nopagebreak \jump \scriptsize \boxedverbatim}
+{ \endboxedverbatim \jump}
+
+
+%--- Tracer une ligne horizontale (0.4 pt est une taille correcte)
+\newcommand{\Hline}[1]{	\noindent\rule{\linewidth}{#1} }
+
+%--- Evite d'ecrire Second Life en entier, idem pour Liden lab
+\newcommand{\SL}{Second Life~\xspace}
+\newcommand{\LL}{Linden Lab~\xspace}
+
+%--- Si l'option titre est passée en parametre
+\if@titles
+	\makeatletter
+	%-- Redéfinition du formatage des subsubsections --
+	\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}
+		{\z@}
+		{-3.25ex\@plus -1ex \@minus -.2ex}
+		{1.5ex \@plus .2ex}
+		{\centering\normalsize\bf\itshape}
+	}
+	%---------------------------------------
+	
+	%------- Redéfinition du formatage du titre (Bordeaux 1) -----------
+	\def\maketitle{%
+		\begin{titlepage}
+			\noindent\includegraphics[scale=0.6]{Images/logo_bd1.png} \\
+			\noindent\small Projet conduit à l'université de Bordeaux 1
+					
+			\null\vfill
+			\begin{center}
+				\jump
+				{\LARGE \bf \@title}
+				\smalljump
+				{\large \@subtitle}
+				\bigjump
+				\@author
+				\bigjump
+				\large \@teacher
+				\HUGEjump
+				\Hline{1.4 pt}
+				\@docinfo
+			\end{center}
+			\vfill\null
+		\end{titlepage}
+	}
+	\def\teacher#1{\def\@teacher{#1}}
+	\def\subtitle#1{\def\@subtitle{#1}}
+	\def\docinfo#1{\def\@docinfo{#1}}
+	%---------------------------------------
+	\makeatother
+\fi
+%--- Fin titres
+
+%------ Citation avec nom de l'auteur (de la citation), -------
+%------   utilisation :  \myquote {Citation}{Auteur}    -------
+\newcommand{\myquote}[2]{%
+	\begin{quote}\og#1\fg\end{quote}
+	\begin{flushright}
+		\textit{#2}
+	\end{flushright}
+}
+%--------------------------------------
+
+%------ Image avec légende (caption genere des bugs) -------------
+\newcommand{\image}[3]{%
+\noindent
+\begin{center}
+\includegraphics[scale=#1]{Images/#2} \smalljump
+%ajouter une compteur pour les numéro des figures 
+\textit{#3}
+\end{center}
+}
+%---------------------------------------
+
+
+%---- Mise en valeur des mots importants --------------
+%ANCIENNE VERSION : \newcommand{\keyword}[1]{%
+%\marginpar{\fontfamily{phv}\selectfont \textsc{\scriptsize{#1}}}%
+%\textbf{#1}\xspace%
+%\index{#1}%
+%}
+%NOUVELLE VERSION plus simple (sans les annotations en marge) :
+\newcommand{\keyword}[1]{%
+\textbf{#1}%
+\index{#1}%
+}
+%--------------------------------------
+
+%- Mails étudiants :
+\newcommand{\etumail}[1]{$<$#1@etu.u-bordeaux1.fr$>$\xspace}
+%- Auteur avec son mail
+\newcommand{\student}[2]{\rm{\large{#1 #2}} \\ \small{\tt{\etumail{\lowercase{#2.#1}}}} }
+%- Date de la dernière d'édition 
+\newcommand{\dateLastEdit}[1]{Date de dernière mise à jour : #1}
+%- Date de création du document 
+\newcommand{\dateFirstEdit}[1]{Date de première mise en ligne : #1}
+%- Version de l'application concernée par le document
+\newcommand{\versionApp}[1]{Version de l'application concernée : #1}
+%- Référence en ligne du document
+\newcommand{\reference}[1]{Reference en ligne : \url{#1}}
+%- Etat actuel du document
+\newcommand{\docState}[1]{Etat : #1}
+
+\endinput

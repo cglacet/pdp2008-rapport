@@ -1,0 +1,28 @@
+\chapter{Langage et bibliothèques utilisés}
+
+\section{Choix du langage de programation}
+D'après les besoins déjà établis, nous avons obté comme le demandait au départ le client, 
+pour un dévellopement en C\#. Voici les raisons de ce choix :
+
+\subsection{Choix du C\#}
+Du fait de l'interopérabilité du langage C\#, nous pouvons utiliser d'autres langages que C\# qui est le langage avec lequel a été faite la libSL. 
+
+\myquote{L'interopérabilité des langages est une fonctionnalité clé du .NET Framework. Comme le code du langage intermédiaire produit par le compilateur C\# respecte la spécification de type commun (CTS), lorsqu'il est généré à partir de C\#, il peut interagir avec le code généré à partir des versions .NET de Visual Basic, Visual C++, Visual J\# ou d'un des vingt autres langages respectant la norme CTS. Un même assembly peut contenir plusieurs modules écrits dans différents langages .NET, et les types peuvent se référencer l'un l'autre exactement comme s'ils avaient été écrits dans le même langage.}{Microsoft \footnote{\url{http://msdn.microsoft.com/fr-fr/library/z1zx9t92.aspx}}}
+
+Le concept d'interopérabilité est interessant dans la mesure où il propose d'utiliser des bibliothèques, écrites dans un certain langage, avec un autre langage. Etant donné que C\# fait partie du Framework .NET, il est possible d'utiliser une bibliothèque C\# avec d'autres langages inclus dans ce framework (VB.NET, J\#, C++, ...) en respectant certains cirtères. L'interopérabilité avec les autres langages est aussi assurée si ils respectent le standard COM \footnote{\url{http://www.microsoft.com/com/default.mspx}} mais demande plus de ressources car le lien entre le framework .NET et les COM object se fait par le biais d'un composant appelé "Runtime Callable Wrapper". 
+
+\begin{center}
+	\includegraphics[scale=0.7]{Images/SchemaInterop.png} \\
+	\textit{Source : Csharphelp \footnote{Csharphelp : \url{http://www.csharphelp.com}}}
+\end{center}
+
+Donc bien qu'il soit possible d'utiliser d'autres langages de programmation, nous nous contenterons de développer en C\# afin de ne pas rajouter un travail de conversion supplémentaire. D'autant plus que C\# possède une syntaxe proche de celle de Java, il nous sera donc plus aisé de nous y adapter. Ainsi, nous ne perdrons pas de temps sur l'aspect aprentissage d'une nouvelle syntaxe.
+
+\section{Bibliothèques utilisées}
+
+En plus du framework .NET 3.5, nous utiliserons la LibSL afin de communiquer avec Second Life. A priori, il ne nous est pas nécessaire d'utiliser d'autres bilbiothèques. 
+Si jamais nous serions amené à communiquer avec des bases de données, nous pourrons le faire en utilisant LINQ qui est directement intégré au Framework .NET 3.5, ce qui nous permettrai de faire directement nos appels aux bases dans le code source en C\#.
+
+ Linden Lab, les créateurs de Second Life, on developpé un langage de script pour Second Life : \keyword{LSL} (Linden Scripting Language). Dans le cadre de ce projet, nous ne pourrons pas l'utiliser car, ce langage est pratique pour faire des petits scripts (taille max des fichier 16Ko), mais inadapté à de plus gros projets et surtout les scripts ne s'appliquent pas aux avatars. 
+\myquote{A script in Second Life is a set of instructions that can be placed inside any primitive object in the world, but not inside an avatar.}
+{\LL \footnote{LSL : \url{http://wiki.secondlife.com/wiki/Help:Getting_started_with_LSL}}} 

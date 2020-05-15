@@ -1,0 +1,34 @@
+@Article{JMLacrosse,
+author = {Jean-Michel Lacrosse},
+title = {Le Test de Turing},
+URL = {http://www.harmattan.fr/index.asp?navig=catalogue&obj=article&no=2811},
+year = {2006},
+%note = {Vision assez philosophique sur la notion de machine pensante (qu'est-ce que \c{c}a pourrait \^etre, qu'est-ce que \c{c}a pourrait impliquer, qu'est-ce que penser...)}
+}
+
+@Article{Saygin99turingtest:,
+author = {Ayse Pinar Saygin and Ilyas Cicekli and Varol Akman},
+title = {Turing Test: 50 years later},
+journal = {Minds and Machines},
+year = {1999},
+volume = {10},
+pages = {2000},
+%note = {Traite de fa\c{c}on plus approfondie les concepts et les enjeux du Test de Turing ("Turing's aim is to provide a method to assess whether or not a machine can think [...] by proposing what is called the Imitation Game (IG)." suivi de 5 pages sur le principe du Imitation Game) et du Test de Turing depuis sa cr\'eation jusqu'\`a maintenant, avec les cons\'equences et les r\'eponses de ces cons\'equences qu'il ai pu engendrer}
+}
+
+@Book{TheTuringTest,
+author = {Graham Oppy and David Dowe},
+editor = {Stanford Encyclopedia of Philosophy},
+title = {The Turing Test},
+publisher = {Stanford Encyclopedia of Philosophy},
+year = {1er publication 2003, derni\`ere mise \`a jour 2008},
+%note = {Une approche plus "biologique" du test de turing suivit par des interrogations sur la difficult\'e de ce dernier.}
+}
+
+@Article{Twinkies,
+author = {Christopher Scott Gouge and Todd William Stadler},
+title = {The T.W.I.N.K.I.E.S. Turing Test},
+year = {1999},
+URL = {http://www.twinkiesproject.com/turing.html},
+%note = {Un exemple d'utilisation du test de turing \`a des fin scolaires}
+}

@@ -1,0 +1,103 @@
+%% Compilation :
+%% pdflatex "rapport(term).tex" ; makeindex "rapport(term).idx" ; bibtex "rapport(term)" ; pdflatex "rapport(term).tex" ; pdflatex "rapport(term).tex"
+%%
+\documentclass[10pt,a4paper]{report}
+\usepackage[titles]{mypack}
+
+\docinfo {
+\small{
+	\begin{flushleft}
+		\dateFirstEdit{12 janvier 2009} \\
+		\dateLastEdit{2 février 2009} \\
+		\versionApp{V0} \\
+		\docState{Terminé} \\
+		\reference{https://services.emi.u-bordeaux1.fr/projet/viewvc/botinsl2009/trunk/Rapport/rapport-28term-29.pdf?view=log}
+	\end{flushleft}
+	}
+}
+%----------------------------------------------------------
+
+%--------- informations visible sur le titre -----------
+\title{Bot in Second Life}
+\subtitle{Individu autonome pour la recherche d'informations sur Second Life}
+\author{
+	\student{Besse} {Julien} \vskip 0.2cm
+	\student{Blondeau} {Olivier} \vskip 0.2cm
+	\student{Delahaye} {Thomas} \vskip 0.2cm 
+	\student{Glacet} {Christian}  \vskip 0.2cm
+}
+\teacher{Client : Philipe Narbel \\ Chargé de TD : Pascal Desbarat}
+%---------------------------------------------------------
+
+% Saut entre les "paragraphes"
+\setlength\parskip{0.1cm}
+% Profondeur de la numérotation
+\setcounter{secnumdepth}{3}
+% Création de l'index
+\makeindex
+
+%%%%%%%%%%%%%%%%%%%%%DOCUMENT%%%%%%%%%%%%%%%%%
+\begin{document}
+
+% Met les commentaire en marge à gauche (au lieu de droite par défault)
+\reversemarginpar{}
+%------ Titre ------
+\maketitle
+
+%---- Résumé -------
+\begin{abstract}
+Ce projet consiste en la création d'un bot (entité virtuelle autonome) qui adoptera un comportement humain afin de rechercher des informations dans le Monde de Second Life. Pour se faire, le bot devra se déplacer, discuter et faire des choix de manière autonome. L'utilisateur final de ce projet devra juste donner des caractéristiques personnelles au bot, pour le rendre plus humain, ainsi que l'objet de sa recherche. Le bot sera alors lancé dans ce monde virtuel pour commencer son investigation et trouver une réponse à sa recherche. Le bot fournira un rapport sur sa recherche et sera aussi capable d'améliorer sa base de connaissances grâce à ses différentes recherches. Ce projet sera réalisé à l'aide du projet open-source libSL qui nous a fourni les méthodes pour faire interagir un bot avec le monde de Second Life.
+
+% Mieux faire quand on aura le temps : 
+%\hugejump 
+%\begin{center}
+%	\textbf{Remerciements}
+%	\jump
+%\end{center}
+%Ce compte rendu a été écrit en \LaTeX ~\xspace à l'aide un tutoriel de Josselin Noirel~\cite{JNLatex}.
+
+\end{abstract}
+
+%---- Sommaire ------
+\setcounter{tocdepth}{2} %-profondeur du som.
+\tableofcontents
+%--------------------
+
+%--- Chapitres ------
+% Définition du domaine d'application
+\include{Chapitres/domaine}
+% Etude de l'existant, qu'allons nous pouvoir utiliser, quelles seront nos sources d'inspiration
+\include{Chapitres/existant}
+
+% Etude des besoins, étude de faisabilité et schéma de dépendance des fonctions
+\include{Chapitres/faisabilite}
+\include{Chapitres/besoins}
+\include{Chapitres/schemafonc}
+
+% Choix du langage de programmation et détails des bibliothèques utilisée.
+\include{Chapitres/choixlangetbibli}
+
+% Planning prévisionnel et effectif
+\include{Chapitres/plannings}
+
+% Architecture du logiciel, pour le moment la structure globale (seule, a venir : diagramme de classe, MCD, etc.)
+% \include{Chapitres/architecture}
+%--------------------
+
+%-- Bibliographie ---
+%\nocite*
+\bibliographystyle{IEEEtranS}
+\bibliography{Bibliographie/ia,Bibliographie/turing,Bibliographie/chatbot,Bibliographie/latex}
+\textbf{\textit{Remarques}} : 
+\begin{itemize}
+	%\item Les références non citées sont commentées.
+	\item Toutes les pages web ont été dernièrement consultée le 12 janvier 2009
+	\item Style de la bibliographie : Copyright (c) 2003 Michael Shell (IEEEtran)
+\end{itemize}
+%--------------------
+
+%-- Index -----------
+\printindex
+%--------------------
+
+\end{document}

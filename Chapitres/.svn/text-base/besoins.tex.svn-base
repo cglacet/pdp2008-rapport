@@ -1,0 +1,502 @@
+%-- Définition des besoins fonctionnels et non fonctionnels nécessaires à l'établissement d'un cahier des charges.
+\chapter{Définition des besoins}
+
+%Le client désire pouvoir rechercher des informations sur le support \SL. Pour cela, nous devrons utiliser un robot capable d'effectuer cette tâche de manière totalement \keyword{autonome}. 
+%Tous les besoins découlent donc de cette demande. Nous ne parlerons pas des fonctionnalités déjà en fonction dans le projet de l'année passée (déplacements, interactions de base avec les autres joueurs, suivre un avatar, ... (voir "analyse de l'existant").
+%Pour mener à bien ce  projet, nous devons avant tout arriver à distinguer quels sont les besoins fonctionnels et non fonctionnels de celui-ci.
+%Nous commencerons logiquement par énumérer et détailler les besoins non fonctionnels puis les besoins fonctionnels relatifs.
+
+%---------- Quels sont les objectifs globaux  ----------------%
+%\section{Définition du projet}
+Afin d'introduire le sujet, nous avons effectués diverses recherches sur les mots clés liés à celui-ci, à savoir : 
+
+\begin{itemize}
+	\item Chatbots
+	\item LibSL
+	\item Second Life
+	\item Turing Test 
+\end{itemize}
+
+
+Ces recherches nous ont permis de mettre en avant les spécificités et les contraintes qui sont liés, directement ou indirectement, au sujet. Nous rappellerons le sujet afin d'analyser : "Individu autonome pour la recherche d'information sur Second Life". Comme précisé dans le sujet, le client souhaite utiliser l'application dans le but de récolter des informations. Nous devons néanmoins tenir compte de la spécificité du projet qui devra être appliqué à un monde virtuel (Second Life) persistant, vaste et regroupant des individus contrôlés directement par des humains (ou autonomes). L'automatisation de ces recherches d'informations permet d'éviter le côté rébarbatif du jeu de questions/réponses ainsi que la perte de temps associée. Pour cela, le robot mis en place devra être capable d'effectuer correctement requêtes souhaitées par l'utilisateur au moyen d'un fichier de configuration. L'autre problème qui sera posé par le robot, bien que celui-ci soit implicite, est lié au fait que les recherches peuvent être moins pertinentes si le robot ne se ''déguise'' pas en humain. Tout cela implique tout de même beaucoup de difficultés et de risques associés ; par exemple, nous pourrons citer celle de se faire passer pour un humain qui pourrait être comparable à un Test de Turing légèrement plus simpliste. Pour pouvoir être efficace dans le jeu des questions/réponses, il faut bien sûr que le robot (ou bot) puisse communiquer (chatbot). Ce dernier point relève encore une fois la difficulté du projet puisqu'il implique une analyse syntaxique minimale pour obtenir les mots-clés de la réponse, une capacité à produire ou répéter des phrases correctes pour communiquer et enfin une capacité de ''réflexion'' pour savoir si la réponse reçue est en rapport avec la question posée.
+
+Il faut aussi remarquer que le sujet ne spécifie pas la recherche à effectuer, ce qui implique donc une capacité à s'adapter à l'environnement définit par l'utilisateur. Nous pourrions imaginer que celui-ci puisse indiquer au programme quel thème est recherché, quelle est la question correspondant aux réponses souhaitées, la personnalisation du bot (sa vie, ses goûts, ses actions possibles, \ldots) Ces diverses informations pourraient améliorer le côté humain du robot pour qu'il soit plus efficace dans ses recherches.
+
+Enfin, l'application doit être en mesure de récupérer des informations de la base de donnée du monde virtuel afin d'en retirer des informations ayant un intérêt pour le robot dans sa quête. 
+%-------------------------------------------%
+
+
+%---------- Besoins non fonctionnels ----------------%
+\section{Les besoins non fonctionnels}
+
+%-------------------------------------------%
+\subsection{Le bot devra paraître humain }
+\subsubsection{Description du besoin}
+
+\paragraph{Résumé :}
+
+\begin{itemize}
+	\item Le bot devra "passer le test de Turing" (30\% des avatar pensent que nous somme humain) ; 
+\end{itemize}
+
+\paragraph{Détails :}
+
+Afin de faciliter les \index{conversation}conversations avec les joueurs de Second Life, le bot ne devra pas être distinguable parmi les autres joueurs humains présents dans ce monde.
+En effet, les joueurs auront plus facilement tendance à entretenir une conversation intéressante avec un humain qu'avec un robot (l'idée de communiquer avec un robot évoque tout de suite un côté mécanique, répétitif que l'on n'a pas avec un humain).
+Plus les informations communiquées par l'interlocuteur seront sincères, plus les informations obtenues par le robot seront correctes et crédibles. Cependant, le but de ce sujet n'étant pas de divulguer la vie privée de notre robot, celui-ci ne tentera en aucun cas d'engager une conversation réellement variée.
+Par contre, il pourra donner des détails de sa vie de manière à entretenir la confiance avec son interlocuteur mais son but premier est de poser des questions concernant son sujet de recherche ; le bot est avant tout un être obsessionnel !
+
+\subsubsection{Tests de validation}
+Il sera évidemment très difficile de juger du bon fonctionnement de cette option. En effet, juger l'humanité du bot implique d'avoir des limites de ce que nous considérons comme un comportement humain, or dans un jeux tel que Second Life, une telle limite n'est pas aisément définissable.
+En se fixant comme limite le fait de passer pour une personne ennuyeuse qui ne pose que des questions (en suivant son objectif obsessionnel), on pourra vérifier que nous répondons bien aux besoins en demandant à nos interlocuteurs (en fin de conversation) s'ils pensent que nous sommes un bot.
+Si plus de 30\% (cf. Test de Turing) des gens sont convaincus qu'ils n'ont pas en face d'eux un bot, alors nous pourrons considérer que l'objectif est atteint.
+%-------------------------------------------%
+
+%-------------------------------------------%
+\subsection{Généricité des actions du bot}
+\subsubsection{Description du besoin}
+Le sujet ne spécifiant aucune méthode de recherches et aucun sujet particulier, notre bot devra être \index{réglable}réglable par l'utilisateur suivant certains critères. 
+Tout en gardant le même ''\index{corps}corps'', le bot devra être capable d'adopter plusieurs types de comportements différents. 
+Ceci ayant pour but d'avoir plusieurs types de bots pour plusieurs types de recherches tout en gardant une même base.
+
+\subsubsection{Tests de validation}
+
+\paragraph{Résumé :}
+\begin{itemize}
+	\item Lancer plusieurs robots avec des fichiers de configurations différents, observer le comportement. S'ils posent des questions différentes l'un de l'autre, le test est passé avec succès ;
+	\item Lancer plusieurs robots avec des objectifs de recherche différents à atteindre. A la fin de la recherche, faire une comparaison de leur base de donnée. Si elles sont différentes et que de nouvelles entrées sont présentes, le test est passé avec succès ;
+\end{itemize}
+
+\paragraph{Détails :}
+Lancer plusieurs bots définis avec des comportements différents et constater les différences. Si les comportements observés sont en accord avec ceux souhaités on peut considérer le test comme valide.
+
+Un autre test consistera à lâcher les bots dans le monde de \SL à la recherche de leurs objectifs. Dès que le laps de temps défini est écoulé, on stop les bots et on fait une comparaison de leurs données collectées.
+Si les bots ont tous obtenu des informations proches de leur thème et qu'ils ont enrichi leur base de données, on pourra dire que notre "corps" permet bien la généricité des actions.
+
+Attention : la certification de ce test dépend surtout des différences d'interprétations des résultats, il nous est donc pas rééllement possible de valider ces tests de façon rigoureuse.
+
+%-------------------------------------------%
+
+
+%-------------------------------------------%
+\subsection{Utilisation d'AIML}
+\subsubsection{Description du besoin}
+Le bot de l'ancien groupe utilisait \index{AIML}AIML. Dans un premier temps, nous envisageons d'utiliser une structure AIML, que l'on pourrait gérer de manière dynamique. 
+Par exemple, considérons que le bot sache qu'il existe des chocolats. 
+Imaginons que le bot rencontre un joueur avec lequel il discute de ce sujet, il pourrait alors acquérir de nouvelles informations sur les chocolats (il en existe des noirs, blancs\ldots) et ainsi améliorer ses connaissances (sa structure AIML).
+\subsubsection{Tests de validation}
+
+\paragraph{Résumé :}
+
+Sauvegarder la base de donnée avant utilisation. 
+Laisser le bot récolter des informations. A la fin, on compare sa \index{base de donnée}base de donnée courante avec la sauvegarde. Si de nouvelles entrées sont présentes, l'objectif est atteint.
+
+\paragraph{Détails :}
+
+Pour tester la bonne utilisation d'AIML et surtout de notre AIML dynamique, nous effectuerons une comparaison entre les fichiers AIML d'origine et ceux obtenus après plusieurs discussions de notre bot avec une copie plus intelligente de lui même qui lui parlera des sujets qu'il connaît mieux que son double. 
+Pour que le test soit considéré comme réussi, il faut absolument un enrichissement de sa base de donnée AIML, le bot "moins intelligent" devra avoir enregistré au moins 30\% des informations de l'autre bot. Mais aussi vérifier que le contenu rajouté est pertinent.
+%------------------------------------------%
+
+
+%-------------------------------------------%
+\subsection{Temps de réponse du Bot après analyse de la réponse de l'humain}
+\subsubsection{Description du besoin}
+Ce besoin se découpe en deux parties. 
+Le premier besoin vient du fait qu'il faut rester crédible envers l'humain qui parle à notre bot. 
+En effet, une réponse ne doit pas être instantanée.
+Un humain tape entre 30 et 60 mots par minute. 
+Si l'humain s'aperçoit que les réponses sont instantanées, il risque de se douter du côté machine de son interlocuteur. 
+Pour se faire il faut établir une stratégie sur le \index{temps de réponse}temps de réponse moyen qui dépendra du nombre de mots de la réponse. 
+Selon le type de bot que l'on utilisera, ce temps de réponse pourra varier. 
+En effet, si notre bot se fait passer pour un enfant, son temps de réponse sera plus long que pour un joueur confirmé.
+La deuxième partie de ce besoin vient de la complexité de l'analyse de la question ou réponse de l'interlocuteur. 
+Selon les cas, notre bot utilisera sa base \index{AIML}AIML ou s'il est dans une impasse, utilisera une requête via l'\keyword{API google} pour améliorer sa réponse. 
+Ce temps d'analyse est à enlever du temps moyen parlé dans le paragraphe précédent. 
+Un prototype d'une telle requête nous permettra de mieux situer le temps nécessaire.
+\subsubsection{Tests de validation}
+
+\paragraph{Résumé :}
+
+Interroger le chatbot sur des mots qui lui sont inconnus. Si le temps de réponse est toujours inférieur à 15 sec alors le besoin sera considéré comme satisfait. 
+
+\paragraph{Détails :}
+
+Pour tester si le temps de réponse est correct, il faudra tester notre bot dans des domaines qu'il ne connaît pas. 
+En le mettant en difficulté, nous verrons le temps qu'il met en recherche.
+Si ce temps est estimé trop long (15 secondes), on pourra répondre à l'humain une phrase type, du genre ''excuse me, my phone rings, I'll be back in few minutes?''. 
+Tout en veillant à ce que ce genre de réponse types ne se répète pas.
+%-------------------------------------------%
+
+
+%-------------------------------------------%
+\subsection{Le bot doit être anglophone}
+\subsubsection{Description du besoin}\index{chatbot}
+L'anglais étant la langue la plus couramment utilisée sur Second Life, nous devons donc faire de notre bot un anglophone afin qu'il ait un champs d'action plus important.
+En effet, celui-ci cherchant à ''s'intégrer'' dans la communauté de joueurs, il se doit de pouvoir communiquer avec la majorité d'entre eux. Nous mettrons au point une stratégie d'insertion d'erreurs de grammaire et d'orthographe afin d'être plus crédible dans le dialogue.
+De plus, pour éviter de reproduire dans les réponses du bot des erreurs commises par l'interlocuteur humain (ce qui ne serait pas très discret, voir paragraphe ''Paraître humain''), nous devrions être à même de détecter ces erreurs.
+
+\subsubsection{Tests de validation}
+
+\paragraph{Résumé :}
+
+\begin{itemize}
+	\item Dans le cas où la langue utilisée par l'interlocuteur est inconnue du robot (tous sauf l'anglais), ce dernier devra être capable de le signifier à son interlocuteur ;
+	\item Sur une journée de recherche (24h complètes), le bot devra utiliser plus de 500 mots différents ;
+\end{itemize}
+
+\paragraph{Détails :}
+
+Pour vérifier que ce besoin est bien pris en compte par le bot, il nous suffirait d'aller à sa rencontre en relevant ses coordonnées dans le jeu, puis de discuter avec lui en anglais afin de connaître sa capacité de communication dans cette langue.
+Nous tenterons de communiquer avec lui dans une autre langue de façon à savoir comment il réagirait devant un joueur ne sachant pas communiquer en anglais.
+
+Pour pousser un peu plus loin ce test, on peut laisser notre bot discuter toute une journée et étudier combien de mots, il a utilisé. D'après des sites spécialisés~\xspace\footnote{Site spécialisés : 
+\begin{itemize}
+	\item \url{http://www.peace.co.uk/1/1.html} ;
+	\item \url{http://englishenglish.com/english_facts_12.htm} ;
+\end{itemize} }
+Une personne parlant anglais utilise plus de 10000 mots. Il faudrait alors voir combien notre bot utilise de mots. 
+Bien sûr il n'utilisera pas autant de mots, mais si le nombre de mots utilisés est conséquent ($>$ 500 mots), on estimera que notre bot à une bonne connaissance de la langue anglaise (suffisante pour \SL).
+Le nombre de mots sera compté de façon automatique, les pluriels seront considérés comme les mêmes mots que les singuliers (dot et dots compterons donc pour un seul mot). 
+
+\subsubsection{Risques liés}
+Il existe deux risques quand à cette partie :
+
+\begin{itemize}
+	\item notre anglais n'est pas parfait, notre bot aura donc un ''parler'' à l'image de notre niveau. Cependant, ce problème est mineur car il y a beaucoup de joueurs qui ne parlent pas dans leur langue natale sur Second Life, même ceux qui sont anglophones ne parlent pas forcément un anglais correct (sms, 1337=Leet\ldots) ;
+	
+	\item détecter que la langue parlée par l'utilisateur est ou non de l'anglais est un problème difficile dans les ''conditions \SL\xspace '' à cause du ''mal parlé'' ;
+\end{itemize} 
+%-------------------------------------------%
+
+
+
+%-------------------------------------------%
+\subsection{Intégrer à son discours des fautes d'orthographe, frappe de façon aléatoire}
+\subsubsection{Description du besoin}
+Pour être crédible au sein de la communauté de Second Life, nous avons compris que notre bot devait commettre des erreurs d'orthographe ou de grammaire. Mais il faut tout de même que notre bot reste compréhensible (nous ne souhaitons pas utiliser le langage dit ''texto''). 
+Pour cela, le bot devra être en mesure de produire des erreurs avec une régularité réglable par l'utilisateur (en fonction de ses besoins) de façon relativement simple (fichier de configuration par exemple). 
+Pour augmenter ou diminuer les fautes volontaires, nous établirons une échelle de valeur (5 étant le plus d'erreurs et inversement, 1 très peu de fautes). Ces erreurs pourront être des fautes d'orthographe, de grammaire ou de frappe.
+\subsubsection{Tests de validation}
+
+\paragraph{Résumé :}
+
+Lancer le chatbot sur \SL avec divers niveaux de taux de fautes. Discuter avec lui. Conclure sur le nombre de fautes présentes dans ses phrases. 
+
+\paragraph{Détails :}
+
+Afin de tester le fait que les erreurs volontaires ne soient pas néfastes à la compréhension, il nous faudra tester notre configuration de taux de fautes de manière ascendante, en commençant par la valeur de fautes la plus faible. Si cette valeur correspond à une bonne compréhension, on passe à la valeur suivante. En discutant avec notre bot, nous pourrons utiliser ces différentes valeurs de réglage et tester rapidement, si notre bot reste compréhensible.
+\subsubsection{Risques liés}
+Les risques ici sont simples, si la partie correction d'erreurs ne fonctionne pas correctement, alors, ici nous intégrerons des erreurs en plus de celle reproduite (fautes d'orthographe non corrigées par exemple). Cela pourrait rendre certaine de nos phrases complètement incompréhensibles. Les risques liés à la correction d'orthographe étant assez grand, ce risque est donc quasiment aussi présent. Cependant, encore une fois, ce risque est négligeable car sur Second Life le bon parlé ne court pas les rues.
+%-------------------------------------------%
+
+
+%---------- Besoins  fonctionnels ----------------%
+\section{Les besoins fonctionnels}
+
+%-------------------------------------------%
+\subsection{Méthode de recherche d'informations (ou sont les informations)}
+\subsubsection{Description du besoin}
+Le bot devra être en mesure de trouver des lieux intéressants pour sa recherche. Il interrogera dans ce but toutes les personnes qu'il croise, si la personne interrogée lui dit qu'elle possède ces informations alors le bot devra poursuivre la discussion. Pour cette recherche, on utilisera comme base un \keyword{formulaire générique} à la manière des sondeurs téléphoniques en adaptant les questions en fonction des mots clé du thème choisi.
+
+Exemple de conversation que le bot pourrait avoir, il commencerait avec une phrase d'accroche sur le thème choisi par l'utilisateur :
+  ''Do you know someone can explain me $this$ ?'' \textbf{ou bien} ''Where can i get informations about $this$ ?''
+, ensuite, si son interlocuteur lui dit qu'il sait des choses à ce propos, il pourrait continuer de l'interroger :
+  ''Can you talk me about $this$''
+
+Enfin, si l'interlocuteur lui dit qu'il sait où/au près de qui il pourrait trouver ce genre d'informations, alors le bot pourra également lui demander si lui ne possède pas quelques informations intéressantes également : 
+  ''You don't know anything about $thi$ ?''
+Si le joueur lui répond que si, alors le bot pourra continuer la conversation \textbf{et} stocker le lieu ''intéressant'' pour y aller ensuite.
+
+Ainsi, on pourrait exploiter la réponse pour trouver les informations de façon plus efficace. Pour finir, on peut orienter la conversation seulement sur la recherche d'informations, donc si l'interlocuteur commence à poser quelques questions, le bot adoptera une stratégie plus autoritaire : ''I prefer when I ask questions !!'' ou bien encore plus niaise : ''I don't know, I only get information about $this$''.
+\subsubsection{Tests de validation}
+
+\paragraph{Résumé :}
+
+Discuter avec le bot et :
+ \begin{itemize}
+ 	\item vérifier qu'il nous interroge sur le sujet désiré après au plus 2 réponses de notre part ;
+	\item lui donner des informations sur des lieux, puis vérifier qu'il les stockes correctement ;
+\end{itemize}
+
+\paragraph{Détails :}
+
+Après avoir engagé la conversation, nous attendons que le Bot nous pose la question. Il faut qu'il la pose vite, sinon le test serait considéré comme raté car un personnage humain ne serait sûrement pas suffisamment patient (au deuxième échange maximum).Après l'avoir renseigné ou au contraire, ne l'avoir rien dit (tout le monde ne sait pas tout), on vérifiera comment l'information est stockée.
+%-------------------------------------------%
+
+%-------------------------------------------%
+\subsection{Trouver les personnes à interroger} \index{avatar}
+\subsubsection{Description du besoin}
+Le Bot devra pouvoir repérer qu'il y a des personnes dans son entourage proche (géographiquement parlant) et ainsi engager une conversation dès que possible (on ne veut pas d'un Bot timide). 
+Le bot pourra ''crier sur la voie publique'' des phrases d'accroches ou entamer une conversation sur le thème avec ''le premier venu''.
+Le bot devra être capable de choisir seul la personne à interroger selon ses critères. S'il arrive dans un endroit avec une forte densité de joueurs, il devra choisir parmi toutes ces personnes, laquelle interroger. 
+On peut envisager de stocker le nom des avatars qu'il connaît déjà et/ou établir une liste de gens qu'il a déjà côtoyé avec un \keyword{indice de satisfaction}. 
+Une personne lui ayant déjà donné une bonne information sera susceptible de lui en redonner une. 
+Le bot devra interroger en priorité les avatars qui lui sont inconnus. 
+Il faut envisager aussi de réinterroger les avatars à haut taux de satisfaction régulièrement en intégrant une variable temps aux avatars connus.
+
+Prévoir le cas où le bot se retrouve dans une zone non ou très peu peuplée, dans ce cas il devrait être capable de se déplacer seul \index{autonome}afin de rejoindre une zone où la population est plus dense. 
+Cela peut aussi jouer sur le degré d'humanisation du bot \index{pathfinding}(sur la forme du déplacement, s'il tient compte de son environnement ou s'il avance, de façon arbitraire, et dès qu'il rencontre un obstacle, change sa direction de façon à contourner le problème).
+\subsubsection{Tests de validation}
+
+\paragraph{Résumé :}
+\begin{itemize}
+\item On place le bot dans le monde second life, si lorsque d'autres avatars sont proche il engage la conversation, alors l'objectif sera considéré comme atteint.
+\item Isoler le bot dans \SL, se positionner non loin de lui. S'il parvient à établir un contact avec nous, lui fournir des informations, partir puis revenir ensuite. Se souvient-il de nous ? Si oui, l'objectif est atteint. 
+
+\end{itemize}
+\paragraph{Détails :}
+Il suffit de placer le bot dans la rue, immobile, voyons s'il engage la conversation lorsque nous passons à coté de lui (avec un second compte).
+Il faudra vérifier que les personnes stockées dans son historique sont réinterrogées de manière régulière, si elles sont présentes bien évidemment. 
+Pour ce faire, on stocke d'un côté l'historique des personnes déjà interrogées et d'un autre côté, les personnes croisées. En faisant le rapprochement des deux, on verra si notre bot exécute correctement son travail.  
+
+Il nous faudrait aussi tester que celui-ci se déplace de façon autonome s'il n'a personne à proximité. Pour cela, nous le placerons dans une zone vide et nous l'observerons de loin ou en caméra aérienne.
+%-------------------------------------------%
+
+
+%-------------------------------------------%
+\subsection{Conserver des historiques de conversation synthétisés}
+\subsubsection{Description du besoin}\index{base de donnée}
+Conserver les conversations que le bot considérerait comme pertinente (dans sa recherche de bots). Si le bot pense qu'une conversation à un intérêt, il pourrait alors garder des traces de cette conversation. 
+On pourrait alors vérifier si nos algorithmes de détection sont efficaces. 
+Nous mettrons également des indices de pertinence sur les conversations. Selon le type de réponse (mots clés), le bot établit un indice de pertinence qui déterminerait le degré de pertinence des informations récoltées lors de cette conversation.
+
+Enfin, il est aussi intéressant de conserver les conversations que le bot considère comme non pertinente, le bot n'utilisera pas cette base de conversation pour sa recherche mais nous (en tant que développeurs) pourrions utiliser cette base pour vérifier que le bot sait identifier correctement l'intérêt d'une information. 
+Cet historique pourrait néanmoins être utilisé par le bot pour qu'il paraisse plus humain (ne pas avoir 2 fois la même conversation avec un joueur).
+
+Ces différentes conversations seront stockées et triées selon leur pertinence afin de simplifier notre travail consistant à vérifier que le bot saura considérer une donnée comme intéressante ou non.
+
+De plus, nous devons mettre en place un système de synthèses des informations. En effet, afin que nous ne passions pas des jours entiers à relire les historiques de ses conversations avec les joueurs/bots, celui-ci devra faire un résumé des informations qu'il a récoltées. 
+Par exemple, le bot devra être en mesure de fournir un échantillon de quelques lignes (20-30) des conversation qu'il aura eut pendant une nuit de recherche (~10 heures). 
+De plus, nous synthétiserons sous une seconde forme les informations récupérées par le bot. 
+En utilisant les mots clés trouvés lors des conversations, nous mettrons en évidence (gras) ces derniers afin de permettre une lecture en diagonale plus aisée et tout aussi compréhensible que le dialogue entier. 
+Le fait d'avoir deux formes de rendu pourrait être intéressant car tout les utilisateurs n'ont pas les mêmes attentes sur le rendu, notamment quand à sa précision sur les informations récoltées.
+
+\subsubsection{Tests de validation}
+
+\paragraph{Résumé :}
+
+\begin{itemize}
+	\item Communication avec nous sur un thème fixé :
+    	\begin{itemize}
+			\item Le bot possède déjà une définition du sujet énoncé. Dans ce cas, il doit recouper les informations afin de différencier le vrai (réponse la plus courante) du faux ;
+			\item Le bot ne possède pas de définition du sujet énoncé. Il doit alors récupérer les mots-clés de la réponse reçue, puis utiliser des requêtes à Google pour vérifier la pertinence des informations perçues ;
+		\end{itemize}
+    \item Communication avec les avatars présents dans \SL : 
+\end{itemize}
+
+La discution étant libre, l'avatar devrait sans cesse aller chercher des informations ailleurs que dans sa base de donnée. Le but étant qu'il arrive à trouver les informations pertinentes par rapport à son sujet d'étude. 
+Le stockage de ces données doit être pris en compte.
+
+\paragraph{Détails :}
+
+Pour tester la bonne analyse du bot en fonctions des données que son interlocuteur lui divulgue, nous partirons sur trois bases différentes. 
+Dans les deux premiers cas, le bot sera en communication avec nous afin que nous puissions le tester avec des mots clés choisis plus ou moins pertinents selon notre bon vouloir (les mots clés sont des adjectifs ou compléments circonstanciels et les mots inconnus jusqu'a présent). 
+Par exemple, nous établirons comme sujet de conversation le thème suivant : un éléphant. 
+Le bot nous posera d'abord la question suivante :
+
+\begin{itemize}
+	\item ''What is an elephant ?''
+	\item ''Elephants are land mammals of the order Proboscidea and the family Elephantidae. There are realy huge and heavy and most of the time, they are grey ! They leaved in the savane but you can see some of them in circus.''
+\end{itemize}
+
+Cette conversation nous paraît assez pertinente car elle mêle des informations nécessaires comme ses caractéristiques, des informations pas tout à fait correcte (couleur qui peut varier), une énumération d'adjectifs puis une information étrange qui va lier son lieu d'habitat et un lieu possible de rencontre (un cirque\ldots);
+
+Deux choses :
+
+\begin{itemize}
+	\item Soit le bot possède déjà une définition plus ou moins précise de ce thème. Dans ce cas, il faudra qu'il soit capable de trouver les mots clés dans l'énoncé de l'interlocuteur et de recouper ces informations avec celles qu'il a en mémoire.
+En cas de non exactitude, soit il se réfèrera à ses statistiques (si 10 personnes lui ont donné une définition similaire et que l'on est les seuls à donner une autre, il ne prendra pas en compte cette dernière) où si celles si sont nulles ou équivalente à 50\% d'exactitude, le bot devra pouvoir effectuer une requête à Google en utilisant les mots clés donnés par l'interlocuteur et analyser les réponses retournées.
+	\item Soit le bot n'a aucune définition en mémoire et dans ce cas, il doit analyser la réponse de l'interlocuteur afin d'en retirer des mots-clés. Une fois cette étape effectuée, le bot doit recueillir des informations grâce à une API Google permettant d'effectuer des requêtes sur le moteur de recherche de même nom. Le bot devra faire une comparaison entre ce que lui a signaler l'interlocuteur (les mots clés) et les résultats obtenus grâce à l'API. En comparant ces divers résultats aux 10 premières pages référencées par Google, nous pouvons nous lancer dans une analyse comparative de certains mots clés entre le contenu de ces pages web et le contenu de notre conversation :
+\end{itemize}
+
+Enfin, 
+\begin{itemize}
+	\item si le rapport entre les mots clés de ces pages web et ceux de notre conversation est supérieur 0.6 (au moins 60\% des mots clé des pages web sélectionnées se trouvent dans la conversation) on considère que cette dernière est pertinente ;
+	\item sinon on ne la considère pas comme pertinente mais nous la garderons pour que nous puissions contrôler par nous même que la conversation est réellement non pertinente ;
+\end{itemize}
+
+Lorsque tout ces tests auront été effectués, le bot pourra sera alors testé avec de vrais joueurs afin d'avoir des conversations plus imprévisible. 
+Ce test se déroulera exactement comme ceux nous impliquant dans le dialogue, sauf que un réel interlocuteur jouera notre rôle.
+
+Si à la lecture la synthèse un être humain lambda y trouve du sens et une certaine cohérence, nous pourrons considérer que le test est validé.
+%-------------------------------------------%
+
+
+
+%-------------------------------------------%
+\subsection{Histoire et personnalité du bot}
+\subsubsection{Description du besoin}
+Afin de réussir au mieux sa mission, notre bot se doit d'être crédible dans son rôle.
+Pour se faire, il faut qu'il ait son histoire propre et ses propres caractéristiques pour ressembler à un humain.
+Les agissements d'un humain sont dictés par son caractère, son facteur social et environnemental.
+Notre bot se doit d'essayer de ressembler au comportement humain.
+Après avoir analysé le projet effectué par l'ancien groupe de PDP sur ce sujet, nous avons pu observer qu'ils avaient mis au point un fichier regroupant une grosse quantité d'informations créées pour personnaliser le bot. 
+Ces caractéristiques pourront être personnalisées selon le type de renseignements recherchés. 
+Voici une liste non exhaustive de ces caractéristiques :
+
+\begin{itemize}
+	\item nom ;
+	\item prénom ;
+	\item âge ;
+	\item ville RL (Real Life) ou SL (Second Life) ;
+	\item son histoire (métier, faits marquants de sa vie\ldots ;
+	\item traits de caractères principaux influant sur les questions et l'attitude du bot dans sa manière de parler ;
+	\item traits physiques spécifiques (ex: petit gros, bimbo\ldots) ;
+\end{itemize}
+
+Lors de conversations avec des avatars humains, le bot utiliserait son histoire si l'humain lui pose des questions spécifiques.
+Cela augmenterait la crédibilité du bot mais aussi la confiance que l'humain lui donne. 
+Si le bot arrive à gagner la confiance de son interlocuteur, il glanera plus facilement des informations.
+\subsubsection{Tests de validation}
+
+\paragraph{Résumé :}
+
+Discuter avec le chatbot en lui posant des questions sur sa vie personnelle, ses goûts, ses loisirs ou son passé.
+Si celui-ci est capable de récupérer ses données personnelles concernant ces sujets, le test sera considéré comme réussit. 
+
+\paragraph{Détails :}
+
+Nous savons maintenant que le bot devra avoir un passé et/ou un avenir ! Mais afin de vérifier que celui-ci soit au courant du fait qu'il a existé, nous pourrions tout simplement établir une communication avec lui comme par exemple :
+
+\begin{itemize}
+	\item Favorite animal ;
+	\item Birthday ;
+\end{itemize}
+
+Puis, si celui-ci arrive à réagir à des mots-clés comme ceux-ci, nous tenterons alors une communication plus avancée :
+\begin{itemize}
+	\item What is your favorite animal ?
+	\item What is your birthday ?
+	\item Do you love music ?
+	\item What is your book bedside ?
+	\item In which city do you live in the real world ?
+\end{itemize}
+Si le robot est capable d'aller chercher dans ses informations personnelles de telles informations et de nous les transmettres, nous pourrons alors affirmer que notre robot est capable de simuler son existence, d'avoir une mémoire et donc de se rapprocher des humains.
+%-------------------------------------------%
+
+
+
+%-------------------------------------------%
+\subsection{Aider l'utilisateur à éditer un fichier de ''configuration''}
+\subsubsection{Description du besoin}
+Pour définir les critères de recherche du bot, il faudra éditer un fichier (AIML) pour définir son objectif (quelles questions posées). 
+En effet, ce fichier à une structure qui n'est pas forcément connue de tous, c'est pourquoi il nous parait nécessaire de fournir une aide à la saisie d'un tel fichier. 
+Nous proposerons par exemple une interface toute simple qui permettrait de demander à l'utilisateur une liste de question qu'il désire poser et également des réponses qu'il souhaiterait donner à des questions que les joueurs poseront au bot. 
+Cet éditeur devra également permettre de définir le niveau de ''connaissance apparente de la langue'' du bot (voir paragraphe ''Langue parlée par le bot'').
+Voici un aperçu de ce à quoi ressemblera cet éditeur, ici la première page qui permettra de générer le fichier de base : \\
+
+\image{0.7}{MaquetteGenBot.png}{Maquette : génération de bot} \jump
+\image{0.7}{ExempleAide.png}{Maquette : Aide}
+
+\subsubsection{Tests de validation}
+
+\paragraph{Résumé :}
+
+Laisser des utilisateurs non-initiés et non impliqués dans le projet utiliser l'éditeur. Chaque utilisateur répondra à une quantité définies (environ 10) questions notées.
+Si l'application obtient la moyenne sur la totalité des notes données par l'utilisateur, l'éditeur sera considéré comme fonctionnel et utilisable. 
+
+\paragraph{Détails :}
+
+Pour valider cet éditeur, nous proposerons à une partie des élèves de la promotion et également des personnes non informaticiennes de tester l'éditeur, puis de répondre à un questionnaire concernant sa simplicité et son efficacité. Le questionnaire comprendra notamment les questions suivantes :
+
+\begin{itemize}
+	\item L'interface est-elle claire au premier abord ? (exemple de propositions : (5) Tout a fait, (4) plutôt, (3) j'ai mis un peu de temps mais ça reste correct, (2) pffff\ldots. c'était dur, (1) vraiment\ldots je trouve que c'est nul, (0) je ne veux même pas en parler)
+	\item Est-il rapide d'éditer beaucoup de champs ?
+	\item L'éditeur de questions (bot) est-il bon ?
+	\item L'éditeur de correspondances entre les questions (autre joueurs) et réponses (bot) est bonne-il correct ?
+	\item Ai-je réussi à faire tout ce que je voulais ?
+\end{itemize}
+
+Chaque question sera notée sur 5, si la moyenne obtenu sur la globalité du panel est supérieure 2.5 alors l'éditeur répondra correctement au besoins.
+%-------------------------------------------%
+
+
+%-------------------------------------------%
+\subsection{Établir des statistiques concernant les réponses données par les joueurs et bots}
+\subsubsection{Description du besoin}
+Afin de mener à bien ses objectifs ou d'améliorer ses connaissances sur le monde de Second Life, le bot devra pouvoir effectuer des statistiques en fonction des données réceptionnées depuis Second Life.
+Ces données peuvent être de diverses formes. 
+Par exemple, celui-ci pourra souhaiter calculer le rapport entre le nombre de joueurs féminins et masculins dans le jeu, ou encore tirer parti des conversations établies avec les joueurs afin de savoir dans quels lieux le bot aura plus de chance de trouver d'autres robots.
+Autre chose pouvant nous être utile, il s'agira de repérer une conversation intéressante afin de savoir avec quel joueur mais aussi à quel endroit elle a eu lieu.
+La première donnée pourra nous servir lors des prochaines rencontres avec ce joueur de manière à savoir si celui-ci peut nous fournir des informations véridiques et/ou pertinentes tandis que la seconde donnée nous permettra de répertorier les lieux fréquentés et où nous pourrions éventuellement trouver de nouvelles informations.
+Il faut bien sûr avoir en tête que le facteur chance joue un rôle important dans les relations avec les joueurs et donc dans les discussions que le bot aura avec eux.
+\subsubsection{Tests de validation}
+
+\paragraph{Résumé :}
+
+\begin{itemize}
+\item Pour les données chiffrées : calculer des statistiques par rapport à un sujet souhaité. Comparer le résultat avec les statistiques officielles. On pourra accepter une erreur de 10\%.
+\item Pour les données non chiffrées : récupérer les données stockées par le robot. Aller sur \SL avec un autre compte pour vérifier ces informations. Si elles s'avèrent la plupart du temps exact, le test est réussit. 
+\end{itemize}
+
+\paragraph{Détails :}
+Les tests de validation de ce besoin peuvent être séparés en tests qualitatifs et quantitatifs.
+Si le but du bot est d'établir un sondage, un recensement ou tout autre information pouvant être calculée, on peut imaginer une comparaison avec des études déjà existantes sur Internet (exemple sur le \url{http://secondlife.com/whatis/economy_stats.php}). Cette partie du site met à jour quotidiennement différentes informations sur la vie de Second Life. Ainsi on pourrait tester notre bot en lui fixant comme objectif de calculer lui même ce genre d'informations, si on arrive à un écart minime (moins de 10\%), on pourra dire que le test est réussi.
+
+Concernant les informations récoltées par notre bot qui sont plus générales (lieux susceptibles d'accueillir un joueur possédant une information intéressante, endroits fréquentés par un certain type de population,etc\ldots), on devra se connecter avec un compte joueur et vérifier par nous même que les informations vérifiées sont correctes. Le bot aura fait le travail d'investigateur, notre avatar n'ayant plus qu'à aller à l'endroit spécifié et récolter l'information recherchée. Si l'endroit est bien la zone que l'on cherchait, le test sera considéré comme réussi.
+%-------------------------------------------%
+
+%-------------------------------------------%
+\subsection{Faire le lien entre des points clés et des coordonnées dans le jeu}
+\subsubsection{Description du besoin}
+Utile pour le besoin précédent, si quelqu'un nous indique un lieu, il nous dira très certainement quelque chose du genre ''Go to the Moon restaurant at the end of this street''. Le bot devra alors se rendre au restaurant cité. Cette réponse devra nous servir pour la recherche, il serait donc important de traduire l'emplacement désigné avec des mots en une coordonnée spatiale. 
+\subsubsection{Tests de validation}
+
+\paragraph{Résumé :}
+
+Indiquer une liste de 10 lieux au robot puis observer ses déplacements. Si il passe par 8/10 lieux alors le test sera valide.
+
+\paragraph{Détails :}
+
+Nous testerons cette fonctionnalité en envoyant le bot à la recherche d'une suite de lieux bien précis que nous aurions repérés (noms et coordonnées spatiales). Son objectif serait alors simplement de se rendre aux points fixés de façon autonome. Le bot devra passer ainsi par 10 points de contrôle.
+Si le bot arrive au dernier lieux en ayant passé au moins 8 des points alors le besoin sera considéré comme couvert.
+%-------------------------------------------%
+
+
+%-------------------------------------------%
+\subsection{Système de correction d'erreurs (orthographe)}
+\subsubsection{Description du besoin, méthode}
+Nous devons corriger les fautes commises par les joueurs humains pour éviter de les reproduires. 
+Nous utiliserons pour la correction d'orthographe les outils de pilotage mis à disposition par Microsoft : \textit{Interop.Word.dll} (outils permettant la création de documents Office en .NET).
+Ceci nous permettra de trouver des erreurs ; ensuite, il suffira de :
+
+\begin{itemize}
+	\item Corriger directement la faute s'il n'y a qu'une suggestion émise par le correcteur de Word (contenu dans \textit{Interop.Word.dll})
+	\item Sinon, le bot devra choisir la première proposition du correcteur qui est celle qu'il estime la plus probable ce qui impliquera forcément des erreurs. Cependant, nous ne pensons pas qu'il soit objectivement possible de faire mieux.
+\end{itemize}
+  
+\subsubsection{Tests de validation}
+
+\paragraph{Résumé :}
+
+Discuter avec le chatbot en incluant des fautes d'orthographes dans nos messages. Analyser et comparer la réponse de chatbot avec notre message. En déduire de la bonne fonctionnalité de notre chatbot. 
+
+\paragraph{Détails :}
+
+Pour tester cette fonctionnalité, nous devrons simplement parler avec le bot, en le configurant de manière à ce qu'il ne fasse que répéter nos phrases avec les corrections qu'il aura apporté, ainsi, nous pourrions voir s'il les corriges de façon efficace.
+\subsubsection{Les risques liés à la correction orthographique}
+Nous devons tout de même être méfiant lorsque nous pratiquons la correction orthographique. Il se peut parfois que notre correction n'apporte qu'un non-sens par rapport à la phrase souhaitée au départ. Par exemple, si l'interlocuteur du bot dit : ''Ya plu d'humain la ba''
+
+Nous pourrions le corriger en :
+\begin{itemize}
+	\item ''Il n'y a plus d'humains là-bas'' ; 
+	\item ''Il y a plus d'humains là-bas'' ;
+\end{itemize}
+\textit{Nous avons choisi ici un exemple en français pour illustrer le problème mais il est évident que le même genre de confusion est possibles en anglais.}
+
+Cette incapacité à savoir décider de quelle solution adopter a des chances de nous arriver. Ne serais-ce que sur ce point, la correction orthographique peut révéler des risques pour l'établissement de nos statistiques ou même pour la réussite du bot dans son objectif.
+Il est également possible qu'une correction ne soit pas possible dans certains cas précis. 
+%%%% OU ca : a voir %%%%
+%Ce problème nous parait difficile à régler étant donné que même les logiciels spécialisés dans la correction orthographique ne sont pas infaillibles.
+
+Une idée pour palier à ce problème, le bot pourrait avoir des phrases du type : ''I don't understand \ldots'' ou bien ''Please tell me the meaning of this sentence'', etc\ldots
+%-------------------------------------------%
+
+
+
+\section{Les anti-contraintes}
+
+\subsection{On ne demande pas au bot de passer le \index{test de Turing}Test de Turing avec succès}
+Le but de ce bot n'étant pas de simuler réellement un comportement humain, nous ne nous efforcerons pas d'obtenir un bot spécialement doué dans ce domaine. Nous devons avant tout rester concentrer sur notre objectif primordial qui est la recherche d'informations. De toute façon, nous savons qu'actuellement aucun chatbot ne passe le Test de Turing avec succès et nous n'avons certainement pas la prétention de dire que nous réussirons en 3 mois ce que des experts n'ont pas réussit en plusieurs années\ldots Simplement, nous devons tout de même mettre au point notre bot afin qu'il puisse se confondre au mieux avec la population humaine de Second Life (voir le paragraphe ''Paraître humain''). Afin de tester un minimum l'aptitude de notre robot à détecter si son interlocuteur est humain ou robot, nous pourrions effectuer le test suivant :
+Si deux bots lancés en parallèle parviennent à se reconnaître mutuellement alors on considère que le test est un succès. En répétant cette opération un grand nombre de fois, on pourrait alors établir l'aptitude du bot à reconnaître un robot grâce à une conversation.
+De même nous devrons vérifier que le bot ne prend pas des joueurs humains (répondant de façon intelligente) pour des bots. Nous pourrons alors avec un deuxième compte (avec lequel nous nous connecterions à Second Life via l'interface officielle) engager une conversation avec notre Bot pour voir s'il nous prend pour un bot ou non. Il serait intelligent de faire faire ce test à une personne extérieure au groupe de développement car celle-ci ne connaîtrait pas les ''faille de détection de Bot'' et ne serait donc pas influencée dans son discours.

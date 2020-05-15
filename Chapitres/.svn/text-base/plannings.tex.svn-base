@@ -1,0 +1,8 @@
+\chapter{Plannings}
+\section{Planning prévisionnel}
+Voici le planning établi le 4 février 2009, disponible dans sa version $GanttProject$ en annexes.
+Sur cette source (projet.gan), vous pourrez voir les ressources associées à chaque tâches.
+Ci-dessous, un apperçu est disponible
+\begin{landscape}
+	\includegraphics[scale=0.55]{Images/gantt.png}
+\end{landscape}
