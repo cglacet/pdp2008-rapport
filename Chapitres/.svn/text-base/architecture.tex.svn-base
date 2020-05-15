@@ -1,6 +1,0 @@
-\chapter{Architecture logicielle}
-
-\section{Architecture générale}
-Voici la structure (simplifiée) que nous allons mettre en place : 
-
-\includegraphics[scale=0.56]{Images/architectureGenerale.png} 

@@ -1,8 +1,0 @@
-@ARTICLE
-{JNLatex,
-  publisher 	= "Le site des tuteurs",
-  title  			=	"LaTeX",
-  author  		=	"Josselin Noirel",
-  year	 		= 	"2007",
-  url	 			= {http://www.tuteurs.ens.fr/logiciels/latex},
-}
